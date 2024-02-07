@@ -18,39 +18,33 @@ mongoose
     console.log(err);
   });
 
-  const __dirname = path.resolve();
-
+const __dirname = path.resolve();
 const app = express();
 
 app.use(express.json());
-
 app.use(cookieParser());
-app.use(cors(
-  {
-    origin: ["https://real-estate-alpha-fawn.vercel.app/"],
-    methods: ['POST','GET'],
-    credentials: true
-  }
-  ));
-app.listen(3000, () => {
-  console.log('Server is running on port 3000!');
-});
 
+// CORS Configuration
+app.use(cors({
+  origin: "https://real-estate-alpha-fawn.vercel.app",
+  methods: ['POST','GET'],
+  credentials: true
+}));
+
+// Routes
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
 
-
+// Static files
 app.use(express.static(path.join(__dirname, '/client/dist')));
 
+// Catch-all route
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-})
+});
 
-app.get('*', (req, res) => {
-  res.json("hi");
-})
-
+// Error handler middleware
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   const message = err.message || 'Internal Server Error';
@@ -59,4 +53,10 @@ app.use((err, req, res, next) => {
     statusCode,
     message,
   });
+});
+
+// Start server
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}!`);
 });
