@@ -26,7 +26,7 @@ app.use(cookieParser());
 
 // CORS Configuration
 app.use(cors({
-  origin: "https://real-estate-alpha-fawn.vercel.app",
+  origin: "https://real-estate-front-seven.vercel.app",
   methods: ['POST','GET'],
   credentials: true
 }));
