@@ -4,7 +4,7 @@
     { "src": "*.js", "use": "@vercel/node" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "api/$1" }, // Route for API endpoints
-    { "src": "/(.*)", "dest": "/" } // Route all other requests to the serverless function
+    { "src": "/api/(.*)", "dest": "api/$1" },
+    { "src": "/(.*)", "dest": "/" }
   ]
 }
