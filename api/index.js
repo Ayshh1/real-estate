@@ -27,7 +27,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors(
   {
-    origin: ["http://localhost:3000"],
+    origin: ["https://real-estate-alpha-fawn.vercel.app/"],
     methods: ['POST','GET'],
     credentials: true
   }
